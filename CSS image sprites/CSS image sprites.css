@@ -1,0 +1,172 @@
+CSS Image Sprites - 
+1. An image sprite is a collection of images put into a single image.
+2. A web page with many images can take a long time to load and generates multiple server requests.
+3. Using image sprites will reduce the number of server requests and save bandwidth.
+Example - 
+1. Instead of using three separate images, we use this single image ("img_navsprites.gif"):
+2. With CSS, we can show just the part of the image we need.
+
+In the following example the CSS specifies which part of the "img_navsprites.gif" image to show:
+Example - 
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#home {
+  width: 56px;
+  height: 54px;
+  background: url(img_navsprites.gif) 0 0;
+}
+#next {
+  width: 53px;
+  height: 54px;
+  background: url(img_navsprites.gif) -91px 0;
+}
+</style>
+</head>
+<body>
+<img id="home" src="imag1.jpg" width="1" height="1">
+<img id="next" src="img2.jpg" width="1" height="1">
+</body>
+</html>
+
+Example explained:
+A. <img id="home" src="img_trans.gif"> - Only defines a small transparent image because the src attribute cannot be empty. The displayed image will be the background image we specify in CSS
+B. width: 46px; height: 44px; - Defines the portion of the image we want to use
+C. background: url(img_navsprites.gif) 0 0; - Defines the background image and its position (left 0px, top 0px)
+This is the easiest way to use image sprites, now we want to expand it by using links and hover effects.
+
+Image Sprites - Create a Navigation List - 
+1. We want to use the sprite image ("img_navsprites.gif") to create a navigation list.
+2. We will use an HTML list, because it can be a link and also supports a background image:
+Example - 
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#navlist {
+  position: relative;
+}
+#navlist li {
+  margin: 1;
+  padding: 1;
+  list-style: none;
+  position: absolute;
+  top: 0;
+}
+#navlist li, #navlist a {
+  height: 54px;
+  display: block;
+}
+#home {
+  left: 0px;
+  width: 46px;
+  background: url('img1.gif') 0 0;
+}
+#prev {
+  left: 63px;
+  width: 43px;
+  background: url('img2.gif') -47px 0;
+}
+#next {
+  left: 129px;
+  width: 43px;
+  background: url('img3.gif') -91px 0;
+}
+</style>
+</head>
+<body>
+<ul id="navlist">
+  <li id="home"><a href="default.asp"></a></li>
+  <li id="Present"><a href="css starting.asp"></a></li>
+  <li id="After"><a href="css formate.asp"></a></li>
+</ul>
+</body>
+</html>
+
+
+Example explained:
+A. #navlist {position:relative;} - 
+position is set to relative to allow absolute positioning inside it
+B. #navlist li {margin:0;padding:0;list-style:none;position:absolute;top:0;} - 
+margin and padding are set to 0, list-style is removed, and all list items are absolute positioned
+C. #navlist li, #navlist a {height:44px;display:block;} - 
+the height of all the images is 44px
+
+Now start to position and style for each specific part:
+1. #home {left:0px;width:46px;} - 
+Positioned all the way to the left, and the width of the image is 46px
+2. #home {background:url(img_navsprites.gif) 0 0;} - 
+Defines the background image and its position (left 0px, top 0px)
+3. #prev {left:63px;width:43px;} - 
+Positioned 63px to the right (#home width 46px + some extra space between items), and the width is 43px
+4. #prev {background:url('img_navsprites.gif') -47px 0;} - 
+Defines the background image 47px to the right (#home width 46px + 1px line divider)
+5. #next {left:129px;width:43px;} - 
+Positioned 129px to the right (start of #prev is 63px + #prev width 43px + extra space), and the width is 43px
+6. #next {background:url('img_navsprites.gif') -91px 0;} - 
+Defines the background image 91px to the right (#home width 46px + 1px line divider + #prev width 43px + 1px line divider)
+
+Image Sprites - Hover Effect - 
+1. Now we want to add a hover effect to our navigation list.
+Tip: The :hover selector can be used on all elements, not only on links.
+A. Our new image ("img_navsprites_hover.gif") contains three navigation images and three images to use for hover effects:
+Because this is one single image, and not six separate files, there will be no loading delay when a user hovers over the image.
+
+We only add three lines of code to add the hover effect:
+Example - 
+#home a:hover {background: url('img_navsprites_hover.gif') 0 -43px;} - For all three hover images we specify the same background position, only 45px further down
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#navlist {
+  position: relative;
+}
+#navlist li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  top: 0;
+}
+#navlist li, #navlist a {
+  height: 54px;
+  display: block;
+}
+#home {
+  left: 0px;
+  width: 56px;
+  background: url('img1.gif') 0 0;
+}
+#prev {
+  left: 63px;
+  width: 43px;
+  background: url('img2.gif') -47px 0;
+}
+#next {
+  left: 129px;
+  width: 43px;
+  background: url('img3.gif') -81px 0;
+}
+#home a:hover {
+  background: url('img4.gif') 0 -43px;
+}
+#prev a:hover {
+  background: url('img5.gif') -37px -35px;
+}
+#next a:hover {
+  background: url('img6.gif') -81px -35px;
+}
+</style>
+</head>
+<body>
+<ul id="navlist">
+  <li id="home"><a href="default.asp"></a></li>
+  <li id="present"><a href="css_intro.asp"></a></li>
+  <li id="after"><a href="css_syntax.asp"></a></li>
+</ul>
+</body>
+</html>
+
+    
